@@ -12,6 +12,7 @@ from tkinter import filedialog, messagebox
 from PIL import Image
 import webbrowser
 import re
+import sys
 
 ETS2_FOLDER = os.path.join(os.path.expanduser('~'), 'Documents', 'Euro Truck Simulator 2')
 ETS2_MOD_FOLDER = os.path.join(ETS2_FOLDER, 'mod')
@@ -19,6 +20,13 @@ GAME_LOG_PATH = os.path.join(ETS2_FOLDER, 'game.log.txt')
 
 GITHUB_URL = "https://github.com/yourrepo"
 
+def resource_path(relative_path):
+    """ Get absolute path to resource (for PyInstaller and dev environment) """
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
 
 def detect_game_version():
     try:
@@ -239,7 +247,11 @@ def create_gui():
     bottom_frame = ctk.CTkFrame(master=frame)
     bottom_frame.pack(side="bottom", fill="x")
 
-    gear_image = ctk.CTkImage(light_image=Image.open("gear.png"), dark_image=Image.open("gear.png"), size=(24, 24))
+    gear_image = ctk.CTkImage(
+        light_image=Image.open(resource_path("gear.png")),
+        dark_image=Image.open(resource_path("gear.png")),
+        size=(24, 24)
+    )
     ctk.CTkButton(master=bottom_frame, image=gear_image, text="", width=40, command=open_settings).pack(side="left", padx=10)
 
     ctk.CTkButton(master=bottom_frame, text="Remove Selected", command=remove_selected_mods, font=("Helvetica", 16)).pack(side="left", padx=10)

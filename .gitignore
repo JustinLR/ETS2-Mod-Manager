@@ -1,0 +1,27 @@
+# Ignore build artifacts
+build/
+dist/
+*.spec
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore environment settings (if you ever make a virtual environment)
+.env/
+.venv/
+venv/
+
+# Ignore temporary files
+*.log
+*.tmp
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore zip or exe files
+*.zip
+*.exe
